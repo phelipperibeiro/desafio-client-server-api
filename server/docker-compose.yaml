@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  server:
+    build: ./../
+    container_name: server-app
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/go/src/
+networks:
+  default:
+    name: client-server-api-network
+    external: true
