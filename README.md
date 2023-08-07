@@ -16,6 +16,10 @@
 
 * Para subir os containers, entrar nas pastas `client` e `server`, executar o seguinte comando `docker compose up -d`
 
+## Atualizar os pacotes
+
+* Executar o seguinte comando (no container) `docker exec -it server-app go mod tidy`
+
 ## Para subir o server
 
 * Executar o seguinte comando (no container) `docker exec -it server-app go run main.go`

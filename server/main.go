@@ -36,10 +36,12 @@ type ExchangeRate struct {
 var Db *sql.DB
 
 func main() {
+	log.Println("Iniciando servidor")
+
 	Db, _ = sql.Open("sqlite3", "db.sqlite")
 	createTable(Db)
 
-	log.Println("Iniciando servidor")
+	log.Println("Servidor Pronto!!!")
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/cotacao", handler)
