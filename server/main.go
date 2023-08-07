@@ -39,13 +39,17 @@ func main() {
 	Db, _ = sql.Open("sqlite3", "db.sqlite")
 	createTable(Db)
 
+	log.Println("Iniciando servidor")
+
 	mux := http.NewServeMux()
 	mux.HandleFunc("/cotacao", handler)
 	log.Fatal(http.ListenAndServe(":8080", mux))
 }
 
 func handler(responseWriter http.ResponseWriter, request *http.Request) {
+
 	log.Println("consulta iniciada")
+
 	defer log.Println("consulta finalizada")
 
 	if request.URL.Path != "/cotacao" {
