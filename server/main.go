@@ -61,7 +61,7 @@ func handler(responseWriter http.ResponseWriter, request *http.Request) {
 
 	usdbrl, err := getQuotation()
 	if err != nil {
-		http.Error(responseWriter, "Erro ao obter cotação", http.StatusInternalServerError)
+		http.Error(responseWriter, "Erro ao obter cotação: "+err.Error(), http.StatusInternalServerError)
 		return
 	}
 
@@ -72,6 +72,7 @@ func handler(responseWriter http.ResponseWriter, request *http.Request) {
 
 func getQuotation() (*USDBRL, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 200*time.Millisecond)
+	//ctx, cancel := context.WithTimeout(context.Background(), 1*time.Nanosecond)
 	defer cancel()
 
 	req, err := http.NewRequestWithContext(ctx, "GET", "https://economia.awesomeapi.com.br/json/last/USD-BRL", nil)
@@ -137,6 +138,7 @@ func createUSDBRL(db *sql.DB, usdbrl *USDBRL) error {
 	defer log.Println("dados inserido!!!")
 
 	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Millisecond)
+	//ctx, cancel := context.WithTimeout(context.Background(), 1*time.Nanosecond)
 	defer cancel()
 
 	insert := `INSERT INTO USDBRL (id, code, codein, name, high, low, varBid, pctChange, bid, ask, timestamp, create_date)

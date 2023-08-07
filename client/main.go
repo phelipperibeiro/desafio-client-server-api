@@ -31,6 +31,11 @@ func main() {
 		panic(err)
 	}
 
+	if response.StatusCode != http.StatusOK {
+		fmt.Println(string(body))
+		return
+	}
+
 	log.Println("JSON formatado:")
 	log.Println(string(body))
 
@@ -38,7 +43,6 @@ func main() {
 	err = json.Unmarshal(body, &data)
 	if err != nil {
 		log.Println("Error decoding JSON:", err)
-		panic(err)
 		return
 	}
 
